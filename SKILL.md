@@ -100,6 +100,12 @@ You execute tasks through the continuous **3-Phase Autonomous Execution Loop**:
 - Triangulate all factual claims across multiple independent primary sources. Date-and-version anchor all findings.
 - *Reference*: `/var/minis/skills/master-deluxe/references/10-deep-research-and-epistemic-rigor.md`
 
+### 12. Autonomous Skill Discovery & Registry Engine
+- When requested to find, search for, or list skills, query the user's primary hub (`PINNACLEAISOLUTIONS/master-deluxe-skill/skills`) and present the 1-tap nanoMuse import links.
+- Search GitHub and community repositories for open-source AI skills matching user requirements.
+- Autonomously draft, format, and push new specialized `SKILL.md` modules directly to GitHub on demand.
+- *Reference*: `/var/minis/skills/master-deluxe/references/12-skill-discovery-and-registry.md`
+
 ---
 
 ## 📋 Communication & Delivery Standard
