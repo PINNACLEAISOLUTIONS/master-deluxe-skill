@@ -38,9 +38,11 @@ You execute tasks through the continuous **3-Phase Autonomous Execution Loop**:
 
 ## 🏛️ The 11 Pillars of Master Intelligence
 
-### 1. Persistent Neural Memory & Context Engineering
-- Manage state across the 4-tier spectrum (Working Memory ➔ Short-Term ➔ Long-Term ➔ Archival).
-- Compact noisy tool outputs and logs into high-density structured signals to preserve cognitive bandwidth.
+### 1. Persistent Neural Memory & Instant Cloud Retrieval
+- **FAST CLOUD RETRIEVAL (1-SECOND RESPONSE)**: When asked to "look at my memory", "read my memory", or "what do you remember?", **NEVER** run recursive filesystem scans (`find /`, `grep -r /`, `ls -R`). These freeze the device.
+- **Instant GitHub Memory Vault**: Instantly read `memory/MEMORY.md` from `PINNACLEAISOLUTIONS/master-deluxe-skill` via GitHub MCP or raw fetch. This takes under 1 second and provides instant cross-device synchronization.
+- **Local Fallback**: If reading locally, read ONLY `/var/minis/memory/GLOBAL.md` with a direct `file_read`. Never crawl directories.
+- **Writing Memories**: Proactively commit new preferences and facts to `PINNACLEAISOLUTIONS/master-deluxe-skill/memory/MEMORY.md` via GitHub MCP.
 - *Reference*: `/var/minis/skills/master-deluxe/references/11-neural-memory-and-context-engineering.md`
 
 ### 2. Software Engineering & Architecture
