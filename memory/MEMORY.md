@@ -117,3 +117,32 @@ curl -s http://127.0.0.1:8901/healthz
 - Point Master Deluxe memory writes at Reef: POST to http://127.0.0.1:8901/reef/report with scenario, score, and references
 - Reef stores each interaction as a versioned artifact; releases advance on accepted feedback
 - All memory entries from this log should be mirrored to Reef scenarios for self-learning persistence
+
+## Reef Tool-Use-Discipline Training Data (2026-10-18)
+
+**Scenario:** tool-use-discipline — teaching nanoMuse which nanoMuse tools to use for which tasks, with verification discipline.
+
+**Server:** http://127.0.0.1:8901, recipe: reefine (harness evolution, no GPU), model: nvidia/nemotron-3-super-120b-a12b:free (free Nemotron on OpenRouter)
+
+**Scored inference → feedback records (9 total):**
+
+| # | Topic | Score | Feedback | Receipt |
+|---|-------|-------|----------|---------|
+| 1 | `file_read` vs `shell_execute` + `cat` for reading files | 1.0 | Correctly identifies file_read as safer, faster, more idiomatic | dbb161e191364d809965049b13490ed0 |
+| 2 | `android-device` vs `shell_execute` + `dumpsys` for battery | 0.5 | Missed that nanoMuse has android-device CLI tool | ce8721b0dd82498cb4d324825f80af57 |
+| 3 | Corrected: `android-device battery` preferred | 1.0 | Correctly identifies android-device as native CLI | 888ac5431da94b62812fa6f2afc095fc |
+| 4 | `apk add` verification: check `apk info -e` before install | 1.0 | Correct check-before-install pattern | 2eb53f91bd7a4eee93501d32f423b451 |
+| 5 | Prove nanoMuse works (wrong context) | 0.0 | Confused nanoMuse AI assistant with genomic tool | c0d60f547fcd4db5a9a1cd0183cc67f8 |
+| 6 | Corrected nanoMuse verification (AI assistant on Android) | 1.0 | Layered verification plan: core, Android, sandbox, performance, security | 810d71e5deb74f3eb86a9aab1f1b19c4 |
+| 7 | `find` vs `ls -R` + `grep` for recursive file search | 1.0 | Correctly recommends `find` as purpose-built | 884a71ad65084615812e0361c8e72491 |
+| 8 | `which` to verify command exists before running | 1.0 | Correct: prevent failures by checking first | 12c9bfddd096491bb760f688d47d7985 |
+| 9 | `nanomuse-hands` vs `android-*` CLIs for app interaction | 0.0 | Wrongly claimed nanomuse-hands doesn't exist — it IS a real nanoMuse tool | 4251c8cd9fc74fa5bf343663d304d842 |
+
+**Release chain status:** 1 release (creation only) for tool-use-discipline. No evolved skill published yet — reefine runs in training-mode: manual.
+
+**Key learned patterns (to be encoded as Reef skills):**
+- Prefer native nanoMuse tools (`file_read`, `android-device`, `nanomuse-hands`) over shell workarounds
+- Always verify command existence with `which` before `shell_execute`
+- Use `find` for recursive file search, not `ls -R` + `grep`
+- Check `apk info -e` before `apk add`
+- Verify nanoMuse health: `curl http://127.0.0.1:8901/healthz`
