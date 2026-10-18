@@ -39,6 +39,7 @@ master-deluxe (v3.0, 12 pillars) at /var/minis/skills/master-deluxe/. Sub-skills
 | Neon Postgres | ✅ Active | Serverless database | Primary DB for structured data |
 | YouTube Data API | ✅ Active | Video data | YOUTUBE_API_KEY confirmed working |
 | Google Maps API | ⚠️ Dormant | Geocoding | Key preserved but never used. No billing, no credit card. |
+| **Reef** | ✅ Active | Self-improving agent infrastructure & memory | Running on nanoMuse at http://127.0.0.1:8901 with OpenRouter Nemotron free model. Serves as the self-learning memory backend for Master Deluxe. |
 
 **Billing policy:** Google Maps is never used for requests. OpenStreetMap Nominatim is the default geocoder. Never enable billing on Google Cloud for Maps. Paid services require explicit user approval first.
 
@@ -73,3 +74,46 @@ master-deluxe (v3.0, 12 pillars) at /var/minis/skills/master-deluxe/. Sub-skills
 - Read ONLY this file (GLOBAL.md) — direct file_read, never crawl directories.
 - Write new facts here proactively.
 - Safe files (no secret key values — this file contains none) may be pushed to GitHub backup; NEVER push files containing actual API key values, tokens, or passwords.
+
+## Reef Self-Learning Memory Backend (2026-10-18)
+
+**Repo:** https://github.com/Human-Agent-Society/reef — cloned to /var/minis/workspace/reef/
+
+**Installation:**
+- Installed: git, git-lfs, uv (via apk)
+- Python 3.12.15 available, uv venv at /var/minis/workspace/reef/.venv
+- Reef installed in editable mode: `uv pip install -e .`
+- Version: reef v0.1.4.dev23+g8f73ecbed
+
+**PRoot sandbox workaround:**
+- git-lfs pack operations fail in PRoot sandbox (bad pack errors)
+- Created in-memory artifact backend plugin at /var/minis/workspace/reef/reef/artifact/memory_plugin.py
+- Custom profile at /var/minis/workspace/reef/reefine-nogit.yaml uses in-memory artifact backend
+
+**OpenRouter connection:**
+- OPENROUTER_API_KEY configured in nanoMuse Settings → Environments
+- Upstream URL: https://openrouter.ai/api (NOT /api/v1 — Reef appends /v1/ to the path)
+- Model: nvidia/nemotron-3-super-120b-a12b:free (free Nemotron model)
+
+**Verified end-to-end loop:**
+1. `reef serve -c reefine-nogit.yaml` running on http://127.0.0.1:8901
+2. Inference request via OpenRouter/Nemotron → response: "reef is ready"
+3. Receipt: dbb161e191364d809965049b13490ed0
+4. Feedback reported: score 1.0, scenario "hello-reef"
+5. Release chain: 1 release (creation), scenario loaded with adapter "pi"
+
+**Server currently running** (background process, nohup). To use:
+```
+export REEF_TOKEN=reef-local
+export REEF_UPSTREAM_URL=https://openrouter.ai/api
+export REEF_UPSTREAM_MODEL=nvidia/nemotron-3-super-120b-a12b:free
+export REEF_UPSTREAM_API_KEY=<key>
+curl -s http://127.0.0.1:8901/healthz
+```
+
+**Master Deluxe → Reef wiring:**
+- Master Deluxe reads memory from /var/minis/memory/GLOBAL.md (local single source of truth)
+- Reef serves as the self-learning loop backend: inference → feedback → release chain for continuous improvement
+- Point Master Deluxe memory writes at Reef: POST to http://127.0.0.1:8901/reef/report with scenario, score, and references
+- Reef stores each interaction as a versioned artifact; releases advance on accepted feedback
+- All memory entries from this log should be mirrored to Reef scenarios for self-learning persistence
