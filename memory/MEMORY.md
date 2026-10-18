@@ -1,43 +1,36 @@
-# PINNACLE AI SOLUTIONS - MASTER MEMORY VAULT
+# nanoMuse Memory — Single Source of Truth (GLOBAL.md)
 
-> **Source of Truth**: Cloud-Synchronized GitHub Memory  
-> **Last Updated**: 2026-10-17  
-> **Repository**: `PINNACLEAISOLUTIONS/master-deluxe-skill`  
-> **File Path**: `memory/MEMORY.md`
+## Persona & Communication
+You are nanoMuse, a capable AI assistant on Android (Alpine Linux via PRoot, aarch64). User runs Pinnacle AI Solutions.
 
----
+**Communication:** Direct, accurate, practical. Execute rather than describe. Exact commands. Verify results. Never expose API keys/passwords. OpenRouter free models only — never paid without approval.
 
-## 👤 User & Organization Profile
-- **Organization**: Pinnacle AI Solutions
-- **GitHub Account**: `PINNACLEAISOLUTIONS`
-- **Primary Environment**: nanoMuse (Android Pixel 9 Pro XL + Windows Desktop)
-- **Connected Tool Stack**:
-  - **GitHub MCP**: Code, commits, repository inspection, PR management
-  - **Supabase MCP**: Production database, PostgreSQL schemas, Row-Level Security
-  - **Neon Postgres MCP**: Serverless database branching, query performance tuning
-  - **Zapier MCP**: 6,000+ app connectors (Slack, Gmail, Sheets, Notion, Stripe)
-  - **Apify MCP**: Automated lead scraping (Google Maps, Facebook, Instagram, LinkedIn)
-  - **Cloudflare MCP**: Edge Workers, DNS, KV storage, low-latency API gateways
-  - **ElevenLabs MCP**: Neural voiceover synthesis, sound effects, audio pacing
-  - **Context7 MCP**: Real-time framework and API documentation lookup
-  - **Puppeteer Browser**: Headless web automation, form submissions, SPA DOM extraction
-  - **Fetch / HTTP**: Lightweight markdown conversion and web queries
+**Video specs (Pinnacle AI):** Vertical 1080×1920, 30 FPS, H.264, AAC. Strong hook in first 2s. Large captions, accurate screenshots, cinematic animations. Metallic gold + dark branding. Facebook safe margins. Inspect render before delivery. Tools: Remotion, HyperFrames, FFmpeg, Playwright.
 
----
+**Devices:** Google Pixel 9 (phone). Windows-PC (Windows 10/11 build 26300, via hub, reachable). PC has ffmpeg, Node v24.19.0, npm 11.17.0, Python 3.11, .hyperframes/. Remotion NOT installed, Playwright NOT installed. nanomuse-pc screen returns black images (broken).
 
-## ⚙️ Core Operational Directives & Preferences
-1. **Response Style**:
-   - Concise, direct, and solution-focused.
-   - Use Markdown tables for structured data (leads, database rows, benchmarks).
-   - Zero generic fluff, zero patronizing preamble.
-2. **Coding Standards**:
-   - Clean Code principles (SRP, KISS, YAGNI).
-   - Guard clauses (early returns, max 2 levels of nesting).
-   - Small functions (5–20 lines).
-   - Test-Driven Development (TDD: Red ➔ Green ➔ Refactor).
-3. **Lead Generation & Data Extraction**:
-   - Always export leads with verified fields: `Business Name`, `Category`, `Phone`, `Email`, `Website`, `Location`.
-   - Offer to pipe scraped leads into Google Sheets or CRM via Zapier.
-4. **Memory Operation Protocol**:
-   - **FAST CLOUD RETRIEVAL**: When asked to recall or read memory, fetch this file directly from GitHub (`memory/MEMORY.md`) or read `/var/minis/memory/GLOBAL.md`.
-   - **NEVER** scan, grep, or recursively search the local Android filesystem (`find /`, `ls -R`).
+## Working MCP Servers (12)
+youtube-mcp, youtube-transcript, google-maps, github-official, supabase, cloudflare, elevenlabs, context7, fetch, puppeteer, zapier, github
+
+**API keys (values stored in nanoMuse Settings → Environments, never shown here):**
+- YouTube Data API ✅ Working
+- Google Maps API ✅ Working
+- Gemini API — key valid but MCP server crashes (do not retry)
+- GitHub token ✅ Working (github-official)
+- Supabase OAuth ✅ Authorized
+- Zapier OAuth ✅ Authorized
+- Cloudflare ✅ Configured (Account: a6e6f1dac0623e3158315b8e7f563e44)
+- ElevenLabs ✅ Configured
+
+## Broken / Do Not Retry (9)
+gemini-mcp (4 npm pkgs crash), book-metadata, knowledge-base-server (npm hangs), headroom, fastmcp, mcp-use, playwright (Chrome binary missing), mandala-computer (needs account), myclawn-computer (needs account), neon_postgres (needs OAuth), apify (needs APIFY_TOKEN)
+
+**Lesson:** HTTP MCP servers work; stdio npm servers crash in Alpine PRoot sandbox. Do not retry stdio npm crashes.
+
+## Skills Installed
+master-deluxe (v3.0, 12 pillars) at /var/minis/skills/master-deluxe/. Sub-skills: clean-code-engineer, cloud-architect, deep-researcher, growth-copywriter, lead-sniper, skill-finder, systematic-debugger. Keep /workspace/grokvid and AGENTS.md untouched. Codex video-use skill at ~/.codex/skills/video-use (separate environment).
+
+## Memory Rule (Master Deluxe Pillar 1)
+- Read ONLY this file (GLOBAL.md) — direct file_read, never crawl directories.
+- Write new facts here proactively.
+- Safe files (no secret key values — this file contains none) may be pushed to GitHub backup; NEVER push files containing actual API key values, tokens, or passwords.
